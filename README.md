@@ -92,8 +92,8 @@ MongoDB, and Mongoose ODM.
 
 ## Demo
 
-![Video Walkthrough](./assets/DEMOinsomnia.mp4)
-![Insomnia Demo File](./assets/insomniatest.txt)
+[Video Walkthrough](https://drive.google.com/file/d/1c6MMZOakkj3ZOEO-52-5FrYocVeMb8Ic/view?usp=sharing)
+[Insomnia Demo File](./assets/insomniatest.txt)
     - local test file only
 
 ## Technologies Used
