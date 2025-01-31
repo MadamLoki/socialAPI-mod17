@@ -1,6 +1,5 @@
 import { Schema, Types } from 'mongoose';
 import { IReaction } from '../routes/index.js';
-import { dateFormat } from '../utils/dateFormat.js';
 
 export const reactionSchema = new Schema<IReaction>(
     {
@@ -19,8 +18,7 @@ export const reactionSchema = new Schema<IReaction>(
         },
         createdAt: {
             type: Date,
-            default: Date.now,
-            //get: (timestamp: Date) => dateFormat(timestamp),
+            default: () => new Date()
         },
     },
     {

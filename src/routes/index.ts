@@ -11,6 +11,7 @@ export interface IUser extends Document {
 export interface IThought extends Document {
     thoughtText: string;
     createdAt: Date;
+    user: Types.ObjectId;
     username: string;
     reactions: IReaction[];
     reactionCount: number;

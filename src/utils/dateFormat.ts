@@ -33,3 +33,5 @@ export const dateFormat = (timestamp: Date): string => {
 
     return formattedDate;
 };
+
+export default dateFormat;
