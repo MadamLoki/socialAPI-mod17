@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-// Load environment variables
 dotenv.config();
 
 // MongoDB connection string
@@ -15,19 +14,13 @@ const options = {
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI, options);
-
-// Get the default connection
 const db = mongoose.connection;
-
-// Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-// Log once we're connected
 db.once('open', () => {
     console.log('Connected to MongoDB successfully!');
 });
 
-// Handle process termination
 process.on('SIGINT', async () => {
     await db.close();
     console.log('MongoDB connection closed through app termination');
