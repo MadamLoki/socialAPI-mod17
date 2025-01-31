@@ -2,7 +2,6 @@
 import connection from '../config/connection.js';
 import { User } from '../models/User.js';
 import { Thought } from '../models/Thought.js';
-import { Types, Document } from 'mongoose';
 
 // Start the seeding runtime timer
 console.time('seeding');
@@ -76,30 +75,21 @@ connection.once('open', async () => {
             }
         });
 
+        // Add friends between users
+        await Promise.all(createdUsers.map(async (user) => {
+            // Add other users as friends
+            const friendIds = createdUsers
+                .filter(u => u._id !== user._id)
+                .map(u => u._id);
+            
+            await User.findByIdAndUpdate(
+                user._id,
+                { $push: { friends: { $each: friendIds } } }
+            );
+        }));
+
         await Promise.all(thoughtPromises);
         console.log('Thoughts and reactions seeded');
-
-        // Add friends
-
-        interface IUser extends Document {
-            _id: Types.ObjectId;
-            username: string;
-            email: string;
-            thoughts?: Types.ObjectId[];
-            friends?: Types.ObjectId[];
-            __v?: number;
-        }
-
-        interface IThought {
-            _id: Types.ObjectId;
-            thoughtText: string;
-            username: string;
-            reactions?: {
-                reactionBody: string;
-                username: string;
-            }[];
-        }
-
         console.log('Friends connections seeded');
 
         console.timeEnd('seeding complete 🌱');

@@ -1,7 +1,6 @@
 import { Schema, model, Types } from 'mongoose';
 import { IThought } from '../routes/index.js';
 import { reactionSchema } from './Reaction.js';
-import { dateFormat } from '../utils/dateFormat.js';
 
 const thoughtSchema = new Schema<IThought>(
     {
@@ -10,11 +9,6 @@ const thoughtSchema = new Schema<IThought>(
             required: true,
             minlength: 1,
             maxlength: 280,
-        },
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: true,
         },
         createdAt: {
             type: Date,

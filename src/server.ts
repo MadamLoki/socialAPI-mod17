@@ -1,11 +1,15 @@
 import express from 'express';
 import db from './config/connection.js';
+import routes from './routes/api/indexAPI.js';
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Add routes
+app.use('/api', routes);
 
 db.once('open', () => {
     app.listen(PORT, () => {
