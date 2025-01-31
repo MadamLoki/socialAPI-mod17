@@ -1,0 +1,233 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-01-31T10:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v8.5.1",
+  "resources": [
+    {
+      "_id": "req_social_network_base",
+      "name": "Social Network API",
+      "description": "",
+      "url": "http://localhost:3001/api",
+      "method": "GET",
+      "sortNum": -1,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "req_get_users",
+      "parentId": "req_social_network_base",
+      "name": "Get All Users",
+      "url": "{{ _.base_url }}/users",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": []
+    },
+    {
+      "_id": "req_get_user_by_id",
+      "parentId": "req_social_network_base",
+      "name": "Get User by ID",
+      "url": "{{ _.base_url }}/users/{{ _.user_id }}",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": []
+    },
+    {
+      "_id": "req_create_user",
+      "parentId": "req_social_network_base",
+      "name": "Create User",
+      "url": "{{ _.base_url }}/users",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"username\": \"testuser\",\n\t\"email\": \"test@email.com\"\n}"
+      }
+    },
+    {
+      "_id": "req_update_user",
+      "parentId": "req_social_network_base",
+      "name": "Update User",
+      "url": "{{ _.base_url }}/users/{{ _.user_id }}",
+      "method": "PUT",
+      "sortNum": 40000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"username\": \"updateduser\",\n\t\"email\": \"updated@email.com\"\n}"
+      }
+    },
+    {
+      "_id": "req_delete_user",
+      "parentId": "req_social_network_base",
+      "name": "Delete User",
+      "url": "{{ _.base_url }}/users/{{ _.user_id }}",
+      "method": "DELETE",
+      "sortNum": 50000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": []
+    },
+    {
+      "_id": "req_get_thoughts",
+      "parentId": "req_social_network_base",
+      "name": "Get All Thoughts",
+      "url": "{{ _.base_url }}/thoughts",
+      "method": "GET",
+      "sortNum": 60000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": []
+    },
+    {
+      "_id": "req_get_thought_by_id",
+      "parentId": "req_social_network_base",
+      "name": "Get Thought by ID",
+      "url": "{{ _.base_url }}/thoughts/{{ _.thought_id }}",
+      "method": "GET",
+      "sortNum": 70000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": []
+    },
+    {
+      "_id": "req_create_thought",
+      "parentId": "req_social_network_base",
+      "name": "Create Thought",
+      "url": "{{ _.base_url }}/thoughts",
+      "method": "POST",
+      "sortNum": 80000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"thoughtText\": \"Here's a test thought\",\n\t\"username\": \"testuser\"\n}"
+      }
+    },
+    {
+      "_id": "req_update_thought",
+      "parentId": "req_social_network_base",
+      "name": "Update Thought",
+      "url": "{{ _.base_url }}/thoughts/{{ _.thought_id }}",
+      "method": "PUT",
+      "sortNum": 90000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"thoughtText\": \"Updated thought text\"\n}"
+      }
+    },
+    {
+      "_id": "req_delete_thought",
+      "parentId": "req_social_network_base",
+      "name": "Delete Thought",
+      "url": "{{ _.base_url }}/thoughts/{{ _.thought_id }}",
+      "method": "DELETE",
+      "sortNum": 100000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": []
+    },
+    {
+      "_id": "req_add_friend",
+      "parentId": "req_social_network_base",
+      "name": "Add Friend",
+      "url": "{{ _.base_url }}/users/{{ _.user_id }}/friends/{{ _.friend_id }}",
+      "method": "POST",
+      "sortNum": 110000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": []
+    },
+    {
+      "_id": "req_remove_friend",
+      "parentId": "req_social_network_base",
+      "name": "Remove Friend",
+      "url": "{{ _.base_url }}/users/{{ _.user_id }}/friends/{{ _.friend_id }}",
+      "method": "DELETE",
+      "sortNum": 120000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": []
+    },
+    {
+      "_id": "req_add_reaction",
+      "parentId": "req_social_network_base",
+      "name": "Add Reaction",
+      "url": "{{ _.base_url }}/thoughts/{{ _.thought_id }}/reactions",
+      "method": "POST",
+      "sortNum": 130000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"reactionBody\": \"Great thought!\",\n\t\"username\": \"testuser\"\n}"
+      }
+    },
+    {
+      "_id": "req_remove_reaction",
+      "parentId": "req_social_network_base",
+      "name": "Remove Reaction",
+      "url": "{{ _.base_url }}/thoughts/{{ _.thought_id }}/reactions/{{ _.reaction_id }}",
+      "method": "DELETE",
+      "sortNum": 140000,
+      "created": 1706688000000,
+      "modified": 1706688000000,
+      "headers": []
+    },
+    {
+      "_id": "env_base",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3001/api"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url"]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1706688000000
+    }
+  ]
+}

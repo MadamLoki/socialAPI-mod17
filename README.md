@@ -92,7 +92,9 @@ MongoDB, and Mongoose ODM.
 
 ## Demo
 
-![Video Walkthrough]()
+![Video Walkthrough](./assets/DEMOinsomnia.mp4)
+![Insomnia Demo File](./assets/insomniatest.txt)
+    - local test file only
 
 ## Technologies Used
 
@@ -102,6 +104,7 @@ MongoDB, and Mongoose ODM.
 - Mongoose ODM
 - TypeScript
 - dotenv
+- Insomnia
 
 ## Screenshots
 

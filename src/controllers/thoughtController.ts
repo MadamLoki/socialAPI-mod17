@@ -76,23 +76,21 @@ const thoughtController = {
     },
 
     // Delete thought by id
-    async deleteThought(req: Request, res: Response) : Promise<void>   {
+    async deleteThought(req: Request, res: Response): Promise<void> {
         try {
             const thought = await Thought.findById(req.params.id);
             if (!thought) {
                 res.status(404).json({ message: 'Cannot Delete; Thought not found' });
+                return;
             }
-
+    
             // Remove thought from user's thoughts array
-            if (thought) {
-                await User.findByIdAndUpdate(
-                    thought.user,
-                    { $pull: { thoughts: thought._id } }
-                );
-                await Thought.findByIdAndDelete(thought._id);
-            }
+            await User.findByIdAndUpdate(
+                thought.user,
+                { $pull: { thoughts: thought._id } }
+            );
+            await Thought.findByIdAndDelete(thought._id);
             res.json({ message: 'Thought deleted' });
-            return;
         } catch (err) {
             res.status(500).json({ 'Error Deleting Thought': err});
         }
