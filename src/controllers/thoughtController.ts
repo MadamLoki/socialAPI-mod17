@@ -29,7 +29,7 @@ const thoughtController = {
         try {
             const thought = await Thought.findById(_req.params.id)
             if (!thought) {
-                res.status(404).json({ message: 'Thought not found' });
+                res.status(404).json({ message: 'Cannot Find; Thought not found' });
                 return;
             }
             const formattedThought = {
@@ -61,13 +61,14 @@ const thoughtController = {
     async updateThought(req: Request, res: Response) : Promise<void> {
         try {
             const thought = await Thought.findByIdAndUpdate(
-                req.params.thoughtId,
+                req.params.id,
                 req.body,
                 { runValidators: true, new: true }
             );
 
             if (!thought) {
-                res.status(404).json({ message: 'Thought not found' });
+                res.status(404).json({ message: 'Cannot Update; Thought not found' });
+                return;
             } res.json(thought); 
         } catch (err) {
             res.status(400).json({ 'Error Updating Thought': err});
@@ -77,9 +78,9 @@ const thoughtController = {
     // Delete thought by id
     async deleteThought(req: Request, res: Response) : Promise<void>   {
         try {
-            const thought = await Thought.findById(req.params.thoughtId);
+            const thought = await Thought.findById(req.params.id);
             if (!thought) {
-                res.status(404).json({ message: 'Thought not found' });
+                res.status(404).json({ message: 'Cannot Delete; Thought not found' });
             }
 
             // Remove thought from user's thoughts array
@@ -89,45 +90,49 @@ const thoughtController = {
                     { $pull: { thoughts: thought._id } }
                 );
                 await Thought.findByIdAndDelete(thought._id);
-                res.json({ message: 'Thought deleted' });
             }
             res.json({ message: 'Thought deleted' });
+            return;
         } catch (err) {
             res.status(500).json({ 'Error Deleting Thought': err});
         }
     },
 
-    async addReaction(req: Request, res: Response) : Promise<void>   {
+    async addReaction(req: Request, res: Response): Promise<void> {
         try {
             const thought = await Thought.findByIdAndUpdate(
-                req.params.thoughtId,
+                req.params.id,
                 { $push: { reactions: req.body } },
                 { new: true, runValidators: true }
             );
+            
             if (!thought) {
-                res.status(404).json({ message: 'Thought not found' });
+                res.status(404).json({ message: 'Cannot Add Reaction; Thought not found' });
+                return;
             }
             res.json(thought);
         } catch (err) {
             res.status(500).json({ 'Error Adding Reaction': err});
         }
     },
-
-    async removeReaction(req: Request, res: Response) : Promise<void>   {
+    
+    async removeReaction(req: Request, res: Response): Promise<void> {
         try {
             const thought = await Thought.findByIdAndUpdate(
-                req.params.thoughtId,
+                req.params.id,
                 { $pull: { reactions: { reactionId: req.params.reactionId } } },
                 { new: true }
             );
+            
             if (!thought) {
-                res.status(404).json({ message: 'Thought not found' });
+                res.status(404).json({ message: 'Cannot Remove reaction; Thought not found' });
+                return;
             }
             res.json(thought);
         } catch (err) {
             res.status(500).json({ 'Error Removing Reaction': err});
         }
-    }
+    },
     
 }
 

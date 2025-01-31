@@ -12,10 +12,10 @@ router.route('/:id')
     .put(thoughtController.updateThought)
     .delete(thoughtController.deleteThought);
 
-router.route('/:thoughtId/reactions')
+router.route('/:id/reactions')
     .post(thoughtController.addReaction);
 
-router.route('/:thoughtId/reactions/:reactionId')
+router.route('/:id/reactions/:reactionId')
     .delete(thoughtController.removeReaction);
 
 export default router;

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { User } from '../models/User.js';
 import { Thought } from '../models/Thought.js';
 import { Types } from 'mongoose';
@@ -24,7 +24,7 @@ export const userController = {
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
-            res.json(User);
+            res.json(user);
         } catch (err) {
             res.status(500).json({ 'Error Fetching User': err});
         }
@@ -74,25 +74,29 @@ export const userController = {
         }
     },
     // Add friend
-    async addFriend(_req: Request, res: Response): Promise<Response | void> {
+    async addFriend(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            if (!Types.ObjectId.isValid(_req.params.userId) || !Types.ObjectId.isValid(_req.params.friendId)) {
-                return res.status(400).json({ message: 'Invalid user or friend ID' });
+            const { userId, friendId } = req.params;
+    
+            if (!Types.ObjectId.isValid(userId) || !Types.ObjectId.isValid(friendId)) {
+                res.status(400).json({ message: 'Invalid user or friend ID' });
+                return;
             }
     
             const user = await User.findByIdAndUpdate(
-                _req.params.userId,
-                { $addToSet: { friends: _req.params.friendId } },
-                { runValidators: true, new: true }
+                userId,
+                { $addToSet: { friends: friendId } },
+                { new: true }
             ).populate('friends');
     
             if (!user) {
-                return res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ message: 'User not found' });
+                return;
             }
     
             res.json(user);
         } catch (err) {
-            res.status(500).json({ 'Error Adding Friend': err});
+            next(err);
         }
     },
 

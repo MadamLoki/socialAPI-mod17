@@ -3,13 +3,20 @@ import { userController } from '../../controllers/userController.js';
 
 const router = express.Router();
 
-// Add friend to user's friend list
-router.post('/:userId/friends/:friendId', async (req, res) => {
-    await userController.addFriend(req, res) });
-
-// Remove friend from user's friend list
-router.delete('/:userId/friends/:friendId', async (req, res) => {
-    await userController.removeFriend(req, res)}
-);
+router.route('/:userId/friends/:friendId')
+    .post(async (req, res, next) => {
+        try {
+            await userController.addFriend(req, res, next);
+        } catch (err) {
+            next(err);
+        }
+    })
+    .delete(async (req, res, next) => {
+        try {
+            await userController.removeFriend(req, res);
+        } catch (err) {
+            next(err);
+        }
+    });
 
 export default router;
